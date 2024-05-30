@@ -10,6 +10,7 @@ module.exports = defineConfig({
     saveAllAttempts: false,
   },
   e2e: {
+    baseUrl: 'https://www.demoblaze.com',
     setupNodeEvents(on, config) {
       require('cypress-mochawesome-reporter/plugin')(on);
     },
