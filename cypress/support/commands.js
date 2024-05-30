@@ -33,8 +33,15 @@ Cypress.Commands.add('login', (username , password) => {
     cy.get('#loginpassword').type(password);
     cy.get('[onclick="logIn()"]').should('have.text', 'Log in').click();
     cy.wait('@loginCheck');
+    cy.wait(500);
     cy.get('#nameofuser').then((user) => {
         const user_name = user.text().split(' ').pop();
         expect(user_name).to.be.equal(username);
     })
+})
+
+Cypress.Commands.add('logout', ()=>{
+    cy.wait(1000);
+    cy.get('#logout2').click();
+    cy.get('#login2').should('have.text', 'Log in');
 })
