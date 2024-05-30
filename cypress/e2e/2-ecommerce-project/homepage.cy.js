@@ -1,14 +1,22 @@
-import { hp } from "../../support/pageObjectModel/ecommerce/homepage"
-import testaccount from '../../fixtures/ecommerceLogindata.json'
+import { hp } from "../../support/pageObjectModel/ecommerce/homepage";
+import testaccount from '../../fixtures/ecommerceLogindata.json';
+import menu from '../../fixtures/cat_NavBar.json';
 
+/*
+    1. Use retries, if test fails we can ask cypress to retry one more time or depends. 
+    2. import thr fixture file
+    3. if we have array in fixture file use index to grab the required test account
+*/
 
-describe('Verify the homepage components', () => {
+describe('Verify the homepage components',
+    {
+        retries: {
+            runMode: 2,
+            openMode: 1,
+        },
+    },
+    () => {
         beforeEach(() => {
-            /*
-                1. import thr fixture file
-                2. if we have array in fixture file use index to grab the required test account
-            */
-
             let username = testaccount.testAccounts[0].username;
             let password = testaccount.testAccounts[0].password;
             cy.login(username, password);
@@ -26,9 +34,9 @@ describe('Verify the homepage components', () => {
 
         it('Verify the list of categories', () => {
             hp.getlistofCategories().then((ele) => {
-                expect(ele.eq(0).text()).to.equal('Phones');
-                expect(ele.eq(1).text()).to.equal('Laptops');
-                expect(ele.eq(2).text()).to.equal('Monitors');
+                for (let i = 0; i < 3; i++) {
+                    expect(ele.eq(i).text()).to.equal(menu.category[i]);
+                }
             })
         })
 
@@ -39,6 +47,39 @@ describe('Verify the homepage components', () => {
             }).then((response) => {
                 cy.writeFile('cypress/fixtures/list.json', response.body);
                 expect(response.status).to.eq(200);
+            })
+        })
+
+        // Test case to verify each nave bar menu separatuely
+        for (let i = 0; i < 7; i++) {
+            it(`Verify ${menu.navbar[i]} Nav-menu`, () => {
+                hp.getNavbar().then((ele) => {
+                    if (i != 4) {
+                        expect(ele.eq(i)).to.have.css('cursor', 'pointer');
+                        expect(ele.eq(i).text()).to.include(menu.navbar[i]);
+                    } else {
+                        i++;
+                        expect(ele.eq(i)).to.have.css('cursor', 'pointer');
+                        expect(ele.eq(i).text()).to.include(menu.navbar[i]);
+                    }
+
+                })
+            })
+        }
+
+        //Single Test case to test all nav-bar
+        it.skip('Verify Nav menu', () => {
+            hp.getNavbar().then((ele) => {
+                for (let i = 0; i < 7; i++) {
+                    if (i == 4) {
+                        i++;
+                        expect(ele.eq(i)).to.have.css('cursor', 'pointer');
+                        expect(ele.eq(i).text()).to.include(menu.navbar[i]);
+                    } else {
+                        expect(ele.eq(i)).to.have.css('cursor', 'pointer');
+                        expect(ele.eq(i).text()).to.include(menu.navbar[i]);
+                    }
+                }
             })
         })
 
