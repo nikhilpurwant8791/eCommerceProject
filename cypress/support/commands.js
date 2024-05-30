@@ -23,3 +23,18 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('login', (username , password) => {
+    cy.intercept('/check').as('loginCheck');
+    cy.visit('/');
+    cy.get('#login2').should('have.text', 'Log in').click();
+    cy.wait(700);
+    cy.get('#loginusername').type(username);
+    cy.get('#loginpassword').type(password);
+    cy.get('[onclick="logIn()"]').should('have.text', 'Log in').click();
+    cy.wait('@loginCheck');
+    cy.get('#nameofuser').then((user) => {
+        const user_name = user.text().split(' ').pop();
+        expect(user_name).to.be.equal(username);
+    })
+})

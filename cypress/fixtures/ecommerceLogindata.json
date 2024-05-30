@@ -1,0 +1,39 @@
+{
+    "testAccounts" : [
+        {
+            "id":"1",
+            "username":"nikp",
+            "password":"789"
+        },
+        {
+            "id":"2",
+            "username":"automationQA1",
+            "password":"automationQA1"
+        },
+        {
+            "id":"3",
+            "username":"automationQA2",
+            "password":"automationQA2"
+        },
+        {
+            "id":"4",
+            "username":"automationQA3",
+            "password":"automationQA3"
+        },
+        {
+            "id":"5",
+            "username":"automationQA4",
+            "password":"automationQA4"
+        },
+        {
+            "id":"6",
+            "username":"automationQA5",
+            "password":"automationQA5"
+        },
+        {
+            "id":"7",
+            "username":"automationQA6",
+            "password":"automationQA6"
+        }
+    ]
+}

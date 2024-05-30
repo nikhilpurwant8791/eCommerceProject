@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "opencypress": "npx cypress open" ,
+    "headlessmode": "npx cypress run",
+    "project": "npx cypress run --spec \"cypress/e2e/2-ecommerce-project/*\" " 
   },
   "author": "",
   "license": "ISC",
