@@ -4,6 +4,7 @@ import list from '../../../fixtures/list.json'
 export default class HomePage {
     constructor() {
         this.ele = {
+            navMenu: '.nav-item .nav-link',
             list: '.list-group #itemc',
             title: '.col-lg-9 #tbodyid .col-lg-4 .card-title',
             description: '.col-lg-9 #tbodyid .col-lg-4 #article',
@@ -28,6 +29,10 @@ export default class HomePage {
 
     getListOfElement() {
         return list['Items'];
+    }
+
+    getNavbar(){
+        return cy.get(this.ele.navMenu);
     }
 }
 
