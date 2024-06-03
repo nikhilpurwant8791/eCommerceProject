@@ -47,7 +47,6 @@ describe('Verify the homepage components',
             cy.wait('@cart');
             cy.contains('Samsung galaxy s6').should('be.visible');
             cy.get('[data-target="#orderModal"]').should('have.text', 'Place Order').and('have.css','cursor', 'default').click();
-
             cy.wait(500);
             cy.get('#name').type('Max Mike');
             cy.get('#country').type('Uganda');
@@ -58,11 +57,6 @@ describe('Verify the homepage components',
             cy.get('[data-dismiss="modal"]').eq(5).should('have.text','Close').and('have.css', 'cursor', 'default');
             cy.get('[onclick="purchaseOrder()"]').should('have.text','Purchase').and('have.css', 'cursor', 'default').click();
             cy.contains('Thank you for your purchase!').should('be.visible');
-
-
-
-
-
         })
 
     })
