@@ -1,5 +1,6 @@
 import loginData from '../../../fixtures/ecommerceLogindata.json';
 import list from '../../../fixtures/list.json'
+import AddProduct from './addProduct';
 
 export default class HomePage {
     constructor() {
@@ -33,6 +34,11 @@ export default class HomePage {
 
     getNavbar(){
         return cy.get(this.ele.navMenu);
+    }
+
+    goToAddProduct(){
+        cy.get('.card-block .card-title a').eq(0).should('have.text', 'Samsung galaxy s6').click();
+        return new AddProduct ();
     }
 }
 
