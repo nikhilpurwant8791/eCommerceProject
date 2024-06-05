@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "opencypress": "npx cypress open" ,
+    "cypress": "npx cypress open" ,
     "headlessmode": "npx cypress run",
     "project": "npx cypress run --spec \"cypress/e2e/2-ecommerce-project/*\" " 
   },
